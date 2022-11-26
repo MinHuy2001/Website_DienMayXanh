@@ -1,0 +1,168 @@
+﻿
+@{
+    ViewData["Title"] = "Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container pt-5">
+    <div>
+        @*<div class="mb-5">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   Bộ Lọc
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <div class="">
+                        <div>
+                            <span class="" style="font-size:16px">Hãng</span>
+                        </div>
+                        <button type="button" ondblclick="" class="btn_filter">
+                            SAM SUNG
+                        </button >
+                        <button type="button" class="btn_filter" >
+                            SAM SUNG
+                        </button>
+                        <button type="button" class="btn_filter">
+                            SAM SUNG
+                        </button>
+                        <button type="button" class="btn_filter">
+                            SAM SUNG
+
+                        </button>
+                        <button type="button" class="btn_filter">
+                            SAM SUNG
+                        </button>
+                    </div>
+                    <div class="dropdown-item">
+                        <div>
+                            <span>
+                                Giá
+                            </span>
+                            </div>
+                        <div>
+                            <button>
+                                Dưới 5 triệu
+                            </button>
+                            <button>
+                                Từ 5tr - 8tr
+                            </button>
+                            <button>
+                                Từ 8tr - 12tr
+                            </button>
+                            <button>
+                                Từ 12 -15tr
+                            </button>
+                            <button>
+                                Từ 15tr - 30tr
+                            </button>
+                            <button>
+                                Trên 30 triệu
+                            </button>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div>
+                            <span>
+                                Màu
+                            </span>
+                        </div>
+                        <div>
+                            <button>
+                               Xanh
+                            </button>
+                            <button>
+                                Đen
+                            </button>
+                            <button>
+                                Xám
+                            </button>
+                            <button>
+                                Trắng
+                            </button>
+                            
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <button>Huỷ lọc</button>
+                        </div>
+                        <div>
+                           <button>Xem kết quả</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+        <div class="d-block">
+            <div class="row mb-4">
+                <div class="col" style="border-bottom: 2px solid #ffec00;">
+                    <h4>Sản Phẩm</h4>
+                </div>
+            </div>
+            @for (int j = 1; j <= 6; j++)
+            {
+                <div class="row mb-5 d-flex flex-nowrap " style="gap:10px; margin-bottom:6px; height:290px">
+
+                    @for (int i = 0; i <= 5; i++)
+                    {<a class="product-hover" href="#">
+                            <div class="col  list-product" style="padding: 10px">
+
+                                <div class="row list-product-img">
+                                    <div>
+                                        <img class="img-product" style="width:166px" src="	https://cdn.tgdd.vn/Products/Images/42/289663/iPhone-14-plus-thumb-den-600x600.jpg" />
+                                    </div>
+                                </div>
+                                <div class="row" style="padding:0 0 0 15px">
+                                    <span style="font-size:14px; font-weight:500">IPhone 14 Pro-max</span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-8">
+
+                                        <span style="font-size:16px; font-weight:700">32.000.000đ</span>
+                                    </div>
+                                    <div class="col-4">
+                                        <div type="button" class="btn btn-primary" style="font-size:8px">
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col" style="justify-content:center">
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </a>}
+                </div>}
+        </div>
+    </div>
+</div>
+
+@*<script runat="server">
+
+    void Page_Load(Object sender, EventArgs e)
+    {
+        // Manually register the event-handling method for
+        // the Click event of the Button control.
+        Button1.Click += new EventHandler(this.GreetingBtn_Click);
+    }
+
+    void GreetingBtn_Click(Object sender,
+        EventArgs e)
+    {
+        // When the button is clicked,
+        // change the button text, and disable it.
+
+        Button clickedButton = (Button)sender;
+        clickedButton.Text = "...button clicked...";
+        clickedButton.Enabled = false;
+
+        // Display the greeting label text.
+        GreetingLabel.Visible = true;
+    }
+
+</script>*@

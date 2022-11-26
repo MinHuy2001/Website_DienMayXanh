@@ -1,0 +1,77 @@
+﻿body {
+    font-size:14px;
+    color:#ffffff;
+    font-weight:500;
+}
+
+.img-advertise {
+    width: 100%;
+    height: 100%;
+}
+
+.list-product {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #f3f3f3;
+    border-right: 1px solid #f3f3f3;
+    border: 1px solid rgba(168,208,255,.38);
+}
+
+    .list-product .row {
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .list-product .list-product-img {
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 18px;
+    }
+.product-hover{
+    color:#000000;
+}
+.product-hover:hover {
+    background-color: #f5f5f5;
+    box-shadow: 0 2px 12px rgb(0 0 0 / 12%);
+    border-radius: 20px;
+    text-decoration: none;
+    color: #000000;
+}
+
+.checked {
+    color: orange;
+}
+.leftFeatured {
+    border-bottom: 1px solid #f3f3f3;
+    border-right: 1px solid #f3f3f3;
+    border-top: 1px solid #f3f3f3;
+    margin-right: 18px;
+    margin-bottom: 10px;
+}
+.listFeaturedRight {
+    margin: 0 10px 10px 0;
+}
+.textContent {
+    font-size: 14px;
+    line-height: 24px;
+    padding: 0 5px 0 5px;
+    font-weight: 500;
+}
+
+.textMenu{
+    font-weight:500;
+}
+.fa-bars:before{
+    font-size:28px;
+}
+.btn_header {
+    font-size: 12px;
+    line-height: 14px;
+    padding: 6px 14px;
+    border-radius: 4px;
+    text-align: center;
+    float: left;
+    margin: 0 10px;
+    border: 1px solid rgba(168,208,255,.38);
+}
