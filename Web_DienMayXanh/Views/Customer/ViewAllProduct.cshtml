@@ -1,0 +1,73 @@
+﻿@using Web_DienMayXanh.Models;
+@{
+    ViewBag.Title = "ViewAllProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var lbx = ViewBag.Success;
+}
+
+@model List<QL_SanPham>
+<div class="container">
+    
+    <div class="" style="min-height:704px">
+        <div class="mt-4 d-flex justify-content-between">
+            @*@using (Html.BeginForm("ViewAllProduct",))*@
+            <div class="">
+                <h4 style="">Tất cả sản phẩm </h4>
+            </div>
+            <div class="mb-3">
+                <form action="/Customer/ViewAllProduct" method="post">
+                    <label for="disabledSelect" class="form-label">Sắp xếp theo giá</label>
+                    <select id="disabledSelect" name="txtSelect" class="form-select">
+                        <option value="">Lọc Giá</option>
+                        <option value="thap-cao">Từ thấp --> Cao</option>
+                        <option value="cao-thap">Từ Cao --> Thấp</option>
+                    </select>
+                    <button type="submit">Lọc</button>
+                        <p class="text-danger" style="font-size:14px; font-weight:700">@lbx</p>
+                </form>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center" style="flex-wrap:wrap">
+            @foreach (QL_SanPham SANPHAM in Model)
+            {
+            <div class=" " style="width:220px">
+                
+                <div class="  list-product" style="margin:10px">
+                    <a class="product-hover" href="/Customer/ModalProduct/?ID_SP=@SANPHAM.ID_SP">
+                        <div class=" list-product-img">
+                            <div class="d-flex justify-content-center">
+                                <img class="img-product" style="width:166px" src="@SANPHAM.HINH_SP" />
+                            </div>
+                        </div>
+                    </a>
+                    <div class="" style="padding:0 0 0 15px">
+                        <span style="font-size:14px; font-weight:500">@SANPHAM.TenSP</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+
+                            <span style="font-size:16px; font-weight:700">@SANPHAM.DG_Ban đ</span>
+                        </div>
+                        <div class="col-4">
+                            <a href="/Customer/ChonMua/@SANPHAM.ID_SP" class="btn btn-primary" style="font-size:8px">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                            </a>
+                        </div>
+                    </div>
+                    @*<div class="row">
+            <div class="col" style="justify-content:center">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+            </div>
+        </div>*@
+
+                </div>
+                    
+                </div>}
+        </div>
+    </div>
+</div>
+

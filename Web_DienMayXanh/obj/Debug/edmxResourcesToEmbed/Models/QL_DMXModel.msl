@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DienThoaiModelStoreContainer" CdmEntityContainer="DienThoaiEntities">
+    <EntitySetMapping Name="QL_SanPham">
+      <EntityTypeMapping TypeName="DienThoaiModel.QL_SanPham">
+        <MappingFragment StoreEntitySet="QL_SanPham">
+          <ScalarProperty Name="ID_SP" ColumnName="ID_SP" />
+          <ScalarProperty Name="TenSP" ColumnName="TenSP" />
+          <ScalarProperty Name="ID_DM_SP" ColumnName="ID_DM_SP" />
+          <ScalarProperty Name="ID_Hang" ColumnName="ID_Hang" />
+          <ScalarProperty Name="ID_Kho" ColumnName="ID_Kho" />
+          <ScalarProperty Name="ID_GiamGia" ColumnName="ID_GiamGia" />
+          <ScalarProperty Name="HINH_SP" ColumnName="HINH_SP" />
+          <ScalarProperty Name="DG_Ban" ColumnName="DG_Ban" />
+          <ScalarProperty Name="DG_Nhap" ColumnName="DG_Nhap" />
+          <ScalarProperty Name="SL_SP" ColumnName="SL_SP" />
+          <ScalarProperty Name="SL_SPTon" ColumnName="SL_SPTon" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="Mota_SP" ColumnName="Mota_SP" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
