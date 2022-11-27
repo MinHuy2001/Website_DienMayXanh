@@ -20,11 +20,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,700&display=swap" />
 
-
+    @using Web_DienMayXanh.Models;
 </head>
 <body>
     <div class="main">
-        <div class="header h-auto wrapper-header" style="font-size:1.4rem">
+        <div class="header h-auto wrapper-header" style="font-size: 1.4rem; position: fixed; width: 100%; z-index: 4; top: 0;">
             @*<div class="top-header container">
                 <div class="row">
                     <div class="col-6">
@@ -69,12 +69,12 @@
                         <div class="col-4">
                             <div class="row">
                                 <div class="col input-group">
-                                    <input type="text" class="form-control border rounded" style="height:32px; font-size:14px" placeholder="Nhập sản phẩm..." aria-label="search-product">
-                                    <div class="input-group-append btn-search">
-                                        <button class="btn btn-item" type="button">
+                                    <form action="/Customer/XyLyTimKiem" method="post" class="d-flex position-relative" style="width:100%">
+                                        <input type="text" name="txtTimKiem" class="form-control border rounded" style="height:32px; font-size:14px" placeholder="Nhập sản phẩm..." aria-label="search-product">
+                                        <button class="btn btn-item position-absolute" style="right:0; top:-3px" type="submit">
                                             <i class="fa-solid fa-magnifying-glass" style="color:black; font-size:14px"></i>
                                         </button>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -86,10 +86,23 @@
                                             <span>Lịch sử mua hàng</span>
                                         </a>
                                     </div>
-                                    <div class=" w-auto text-center list-unstyled text-light d-flex align-items-center ">
+                                    <div class=" w-auto text-center list-unstyled text-light d-flex align-items-center position-relative ">
                                         <a class="btn_header">
                                             <i class="fa-solid fa-cart-shopping" style="font-size:18px"></i>
-                                          <span> Giỏ Hàng</span>
+                                            <span> Giỏ Hàng</span>
+                                            <label style=" position: absolute; bottom: 25px; left: 42px; border-radius: 50%; text-align: center; /* display: flex; */ justify-items: center; align-items: center;">
+                                                @{
+                                                    GioHang gh = Session["GioHang"] as GioHang;
+                                                    if (gh != null)
+                                                    {
+                                                        <span style=" font-size: 15px; font-weight: 800; color: red;">@gh.soSanPham()</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span  style=" font-size: 15px; font-weight: 800; color: red;">0</span>
+                                                    }
+                                                }
+                                            </label>
                                         </a>
                                     </div>
                                     <div class="list-unstyled h-100 text-light d-flex align-items-center">
@@ -101,19 +114,19 @@
                                     </div>
 
                                     @*<div class="findProduct d-flex align-items-center">
-            <div class="dropdown show">
-                <a class="dropdown-toggle" style="border:1px solid;border-radius:5px; height:24px" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span style="color:#ffff; font-size:14px; font-weight:500">Tìm Kiếm</span>
+                                        <div class="dropdown show">
+                                            <a class="dropdown-toggle" style="border:1px solid;border-radius:5px; height:24px" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span style="color:#ffff; font-size:14px; font-weight:500">Tìm Kiếm</span>
 
-                </a>
+                                            </a>
 
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </div>
-        </div>*@
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <a class="dropdown-item" href="#">Action</a>
+                                                <a class="dropdown-item" href="#">Another action</a>
+                                                <a class="dropdown-item" href="#">Something else here</a>
+                                            </div>
+                                        </div>
+                                    </div>*@
                                 </div>
                             </div>
                         </div>
@@ -123,13 +136,13 @@
                     <div class="row align-items-center" style="height:100%">
                         <div class="col-3 menu-header-left">
                             @*<div class="btn-menu row d-flex">
-                                    <div class="col-2 text-light text-right">
-                                        <i class="fa-solid fa-bars" style="font-size: 18px; line-height: 0; float: left; position: relative; top: 8px;"></i>
-                                    </div>
-                                    <div class="col-10 text-light pl-0">
-                                        <a style="font-size:18px; font-weight:700">Menu</a>
-                                    </div>
-                                </div>*@
+                                <div class="col-2 text-light text-right">
+                                    <i class="fa-solid fa-bars" style="font-size: 18px; line-height: 0; float: left; position: relative; top: 8px;"></i>
+                                </div>
+                                <div class="col-10 text-light pl-0">
+                                    <a style="font-size:18px; font-weight:700">Menu</a>
+                                </div>
+                            </div>*@
                             <div class="navbar navbar-default" style="display:block; flex-wrap:nowrap; padding:0;" role="navigation">
                                 <div class="navbar-header">
                                     <ul class="nav navbar-nav">
@@ -146,7 +159,7 @@
                                                 </div>
 
                                             </a>
-                                            <ul class="dropdown-menu" style="border: 1px solid #f3f3f3; border-radius: 10px; opacity: 0.8; width: 330px;">
+                                            <ul class="dropdown-menu" style="border: 1px solid #f3f3f3; border-radius: 10px; opacity: 1; width: 330px;">
                                                 <li class="dropdown-menu-item"><a href="#">Tivi, Loa</a></li>
                                                 <li class="dropdown-menu-item"><a href="#">Tủ lạnh, Tủ đông</a></li>
                                                 <li class="dropdown-menu-item"><a href="#">Máy giặc, Sấy quần áo</a></li>
@@ -215,16 +228,42 @@
                 </div>
 
             </div>
-        </div>
-        <div class="body-wrapper W-100 h-auto">
-            @RenderBody()
-        </div>
-        <div class="container">
 
         </div>
-        <div class="footer position-relative " style="background-color: #1154c4;">
+        <div class="body-wrapper W-100 h-auto" style="position: relative; max-width: 100%; top: 118px;">
+            @RenderBody()
+        </div>
+
+        <div class="footer position-relative " style="background-color: #1154c4; top: 100px;">
             <div class="container">
-                &copy; 2022 - QL_DienMayXanh - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                <div class="row">
+                    <div class="col-8">
+                        <div>
+                            <a href="/Customer/CustomerHome">
+                                <img src="~/content/img/logohead.png" />
+                            </a>
+                        </div>
+
+                    </div>
+                    <div class="col-2">
+                        <div class="d-flex justify-content-end">
+                            <span>
+                                <a class="text-footer">Giới thiệu</a>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="d-flex justify-content-end">
+                            <span>
+                                <a class="text-footer">Hỗ Trợ</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    &copy; 2022 - QL_DienMayXanh - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </div>
+
             </div>
         </div>
     </div>
@@ -284,6 +323,8 @@
                 //}
             })
         });
+       
+
     </script>
 
 

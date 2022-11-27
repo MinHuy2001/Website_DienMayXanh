@@ -70,3 +70,11 @@ C:\Users\minhh\IT\KhoaLuan\Web_DienMayXanh\Web_DienMayXanh\obj\Debug\Web_DienMay
 C:\Users\minhh\IT\KhoaLuan\Web_DienMayXanh\Web_DienMayXanh\obj\Debug\Web_DienMayXanh.csproj.CopyComplete
 C:\Users\minhh\IT\KhoaLuan\Web_DienMayXanh\Web_DienMayXanh\obj\Debug\Web_DienMayXanh.dll
 C:\Users\minhh\IT\KhoaLuan\Web_DienMayXanh\Web_DienMayXanh\obj\Debug\Web_DienMayXanh.pdb
+C:\Users\minhh\IT\KhoaLuan\Web_DienMayXanh\Web_DienMayXanh\bin\EntityFramework.dll
+C:\Users\minhh\IT\KhoaLuan\Web_DienMayXanh\Web_DienMayXanh\bin\EntityFramework.SqlServer.dll
+C:\Users\minhh\IT\KhoaLuan\Web_DienMayXanh\Web_DienMayXanh\bin\Microsoft.Configuration.ConfigurationBuilders.Base.dll
+C:\Users\minhh\IT\KhoaLuan\Web_DienMayXanh\Web_DienMayXanh\bin\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.dll
+C:\Users\minhh\IT\KhoaLuan\Web_DienMayXanh\Web_DienMayXanh\bin\EntityFramework.xml
+C:\Users\minhh\IT\KhoaLuan\Web_DienMayXanh\Web_DienMayXanh\bin\EntityFramework.SqlServer.xml
+C:\Users\minhh\IT\KhoaLuan\Web_DienMayXanh\Web_DienMayXanh\bin\Microsoft.Configuration.ConfigurationBuilders.Base.xml
+C:\Users\minhh\IT\KhoaLuan\Web_DienMayXanh\Web_DienMayXanh\bin\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.xml

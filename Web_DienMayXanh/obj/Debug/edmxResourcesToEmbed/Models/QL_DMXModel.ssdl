@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DienThoaiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'DienThoai.dbo.Hinh' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Hinh">
+          <Property Name="ID_HinhAnh" Type="char" MaxLength="10" />
+          <Property Name="ID_SanPham" Type="char" MaxLength="5" />
+          <Property Name="HINH_SP" Type="nvarchar" MaxLength="500" />
+          <Property Name="HienThi" Type="bit" />
+        </EntityType>-->
+  <EntityType Name="QL_SanPham">
+    <Key>
+      <PropertyRef Name="ID_SP" />
+    </Key>
+    <Property Name="ID_SP" Type="char" MaxLength="5" Nullable="false" />
+    <Property Name="TenSP" Type="nvarchar" MaxLength="20" />
+    <Property Name="ID_DM_SP" Type="char" MaxLength="5" Nullable="false" />
+    <Property Name="ID_Hang" Type="char" MaxLength="5" Nullable="false" />
+    <Property Name="ID_Kho" Type="char" MaxLength="5" />
+    <Property Name="ID_GiamGia" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="HINH_SP" Type="nvarchar" MaxLength="500" />
+    <Property Name="DG_Ban" Type="float" />
+    <Property Name="DG_Nhap" Type="float" />
+    <Property Name="SL_SP" Type="int" />
+    <Property Name="SL_SPTon" Type="int" />
+    <Property Name="DiaChi" Type="nvarchar" MaxLength="20" />
+    <Property Name="Mota_SP" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+error 6004: The table 'DienThoai.dbo.Hinh' is referenced by a relationship, but cannot be found.
+        <Association Name="FK__Hinh__ID_SanPham__1367E606" />-->
+  <EntityContainer Name="DienThoaiModelStoreContainer">
+    <EntitySet Name="QL_SanPham" EntityType="Self.QL_SanPham" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

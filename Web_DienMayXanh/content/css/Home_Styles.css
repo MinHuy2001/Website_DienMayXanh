@@ -75,3 +75,13 @@
     margin: 0 10px;
     border: 1px solid rgba(168,208,255,.38);
 }
+
+.a-hover:hover {
+    text-decoration: none;
+    color: #000000 !important;
+}
+.text-footer{
+    font-size:14px;
+    font-weight:600;
+    color:#ffff !important;
+}

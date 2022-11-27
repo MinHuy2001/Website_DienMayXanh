@@ -5,6 +5,7 @@
     font-size: 14px;
 }
 
+
 .header {
     background-color: #1154c4;
 }
@@ -175,3 +176,15 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
 .owl-stage-outer{
     padding:0 6px;
 }
+.btn-allView {
+    border: none;
+    color: blue;
+    background-color: transparent
+       
+}
+    .btn-allView:hover, .btn-allView:focus{
+        border: none;
+        cursor: pointer;
+        outline:none;
+    }
+
