@@ -1,0 +1,12 @@
+﻿<div class=" justify-content-start" style="margin-left:-6px">
+    <ul class="d-flex h-auto w-auto m-0 p-2">
+        @foreach (var item in ViewBag.dsDM)
+        {
+        <li class="mr-4 w-auto text-center list-unstyled text-light d-flex ">
+            
+                <a class="text-decoration-none text-light  textMenu" href="/Customer/ProductToMenu/?ID_DM=@item.ID_DM_SP">@item.Ten_DanhMuc</a>
+
+        </li>
+        }
+    </ul>
+</div>

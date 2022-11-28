@@ -142,9 +142,26 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DS_CTKM.cs" />
+    <Compile Include="Models\GiamGia.cs" />
     <Compile Include="Models\HoaDon.cs" />
+    <Compile Include="Models\PhuongThucThanhToan.cs" />
+    <Compile Include="Models\QL_BaoHanh.cs" />
+    <Compile Include="Models\QL_CT_HDB.cs" />
+    <Compile Include="Models\QL_CT_HDN.cs" />
+    <Compile Include="Models\QL_DanhMuc_SP.cs" />
     <Compile Include="Models\QL_DMXModel.cs" />
+    <Compile Include="Models\QL_Hang.cs" />
+    <Compile Include="Models\QL_HD_Ban.cs" />
+    <Compile Include="Models\QL_HD_Nhap.cs" />
+    <Compile Include="Models\QL_KhachHang.cs" />
+    <Compile Include="Models\QL_Kho.cs" />
+    <Compile Include="Models\QL_NCC.cs" />
+    <Compile Include="Models\QL_Nhom_SP.cs" />
     <Compile Include="Models\QL_SanPham.cs" />
+    <Compile Include="Models\QL_TaiKhoan.cs" />
+    <Compile Include="Models\ThanhToan.cs" />
+    <Compile Include="Models\TuVan.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -171,6 +188,9 @@
     <Content Include="Views\Customer\XyLyTimKiem.cshtml" />
     <Content Include="Views\Customer\ViewAllProduct.cshtml" />
     <Content Include="Views\Customer\XyLyTheoGiaThap_cao.cshtml" />
+    <Content Include="Views\Customer\_MenuDropDown.cshtml" />
+    <Content Include="Views\Customer\ProductToMenu.cshtml" />
+    <Content Include="Views\Customer\_MenuNgang.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

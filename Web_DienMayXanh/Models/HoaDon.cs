@@ -13,15 +13,24 @@ namespace Web_DienMayXanh.Models
         public string pTenSP { get; set; }
         public int pSL_SP { get; set; }
         public string pHinh_SP { get; set; }
-        public float donGia { get; set; }
+        public double donGia { get; set; }
+        public double pGiamGia { get; set; }
         public string pMoTa_SP { get; set; }
+        public double ptongtien { get; set; }
 
         QL_DMXModel ql = new QL_DMXModel();
 
+        public double ThanhTien
+        {
+            get { return pSL_SP * pGiamGia; }
+        }
+  
         //Hàm tạo giỏ hàng
         public HoaDon(string maMH)
         {
+            
             QL_SanPham mh = ql.QL_SanPham.Single(n => n.ID_SP == maMH);
+            GiamGia gg = ql.GiamGias.Single(g => g.ID_GiamGia == mh.ID_GiamGia);
             if (mh != null)
             {
                 pID_Hang = mh.ID_Hang;
@@ -30,12 +39,16 @@ namespace Web_DienMayXanh.Models
                 pTenSP = mh.TenSP;
                 pSL_SP = 1 + pSL_SP;
                 pHinh_SP = mh.HINH_SP;
-                donGia = float.Parse(mh.DG_Ban.ToString());
+                donGia = double.Parse(mh.DG_Ban.ToString());
                 pMoTa_SP = mh.Mota_SP;
+                pGiamGia = double.Parse(gg.MucGiamGia.ToString());
             }
         }
 
     }
+
+
+
     public class GioHang
     {
         public List<HoaDon> lst;
@@ -65,25 +78,25 @@ namespace Web_DienMayXanh.Models
             return lst.Count;
         }
         //Tổng số lượng mật hàng//
-        //public int tongSLSP()
-        //{
-        //    int pTongSL = 0;
-        //    if (lst != null)
-        //    {
-        //        pTongSL = lst.Sum(n => n.soLuong);
-        //    }
-        //    return pTongSL;
-        //}
+        public int tongSLSP()
+        {
+            int pTongSL = 0;
+            if (lst != null)
+            {
+                pTongSL = lst.Sum(n => n.pSL_SP);
+            }
+            return pTongSL;
+        }
         ////Tong Thành tien//
-        //public double TongThanhTien()
-        //{
-        //    double pTT = 0;
-        //    if (lst != null)
-        //    {
-        //        pTT = lst.Sum(n => n.ThanhTien);
-        //    }
-        //    return pTT;
-        //}
+        public double TongThanhTien()
+        {
+            double pTT = 0;
+            if (lst != null)
+            {
+                pTT = lst.Sum(n => n.ThanhTien);
+            }
+            return pTT;
+        }
         ////Them vào hd//
         public int them(string pID_SP)
         {
@@ -132,4 +145,5 @@ namespace Web_DienMayXanh.Models
         //    lst.Clear();
         //}
     }
+
 }
