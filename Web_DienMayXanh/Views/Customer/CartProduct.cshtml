@@ -1,128 +1,143 @@
-﻿
+﻿@using Web_DienMayXanh.Models;
 
 @{
     ViewData["Title"] = "CartProduct";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model GioHang
 
 <div class="container">
-    <div class="mb-5" style=" padding: 0 20% 0 20%;  ">
+    <div class="mb-5" style=" padding: 0 20% 0 20%; min-height: 675px; ">
         <div style="background: #fff; box-shadow: 0 0 18px rgb(0 0 0 / 12%); border-radius: 5px; padding: 0 40px 40px 40px; ">
             <div class="">
                 <form action="#" method="post">
-                    <div class="d-flex justify-content-between m-3" style="border-bottom: 1px solid rgba(168,208,255,.38);">
-                        <div>
-                            <a class="nav-link" href="#">Lịch sử mua hàng</a>
+                    @if (Model == null || Model.soSanPham() == 0)
+                    {
+                        <p style="font-size: 14px; font-weight: 700; margin-top: 20px; height: 50px; display: flex; justify-content: center; align-items: center;">Giỏ Hàng trống!!</p>
+                    }
+                    else
+                    {
+                        <div class="d-flex justify-content-between m-3" style="border-bottom: 1px solid rgba(168,208,255,.38);">
+                            <div>
+                                <a class="nav-link" href="#">Lịch sử mua hàng</a>
+                            </div>
+                            <div>
+                                <a class="nav-link" href="/Customer/XoaGioHang">Xoá giỏ hàng</a>
+                            </div>
                         </div>
+
+
                         <div>
-                            <a class="nav-link"href="#">Xoá giỏ hàng</a>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="mb-3" style="border-bottom: 1px solid rgba(168,208,255,.38); ">
-                            @for (int i = 1; i <= 4; i++)
-                            {
+                            
+                            <div class="mb-3" style="border-bottom: 1px solid rgba(168,208,255,.38); ">
+                               
                                 <div class="mb-2" style="border-bottom: 1px solid rgba(168,208,255,.38);">
-                                    <div class="row d-flex">
-                                        <div class="col-3"><img src="https://cdn.tgdd.vn/Products/Images/42/289663/iPhone-14-plus-thumb-den-600x600.jpg" style="width:130px; height:130px" /></div>
-                                        <div class="col-6" style="width:340px">
-                                            <span>IP 14 pro max</span><br />
-                                            <span>Màu: đen</span>
+                                    @foreach (HoaDon item in Model.lst)
+                                    {  
+                                        <div class="row d-flex">
+                                            <div class="col-3"><img src="@item.pHinh_SP" style="width:130px; height:130px" /></div>
+                                            <div class="col-6" style="width:340px">
+                                                <span>@item.pTenSP</span><br />
+                                                @*<span>Màu: đen</span>*@
+                                            </div>
+
+
+                                            <div class="col-3" style="min-width:20px; text-align:center ">
+                                                <span style="text-decoration:line-through">
+                                                    @item.donGia
+                                                </span><br />
+                                                <span style="color:red; font-size:16px; font-weight:700">
+                                                    @item.pGiamGia
+                                                </span>
+                                                @*<span style="width:40px; text-align:center">1</span>*@
+                                                <div class="d-flex justify-content-center">
+                                                    <span>@item.pSL_SP</span>
+                                                </div>
+                                            </div>
+
                                         </div>
+                                        <div class="row d-flex justify-content-around ">
+                                            <div class="col-9 text-center">
+                                                <a  href="/Customer/XoaProductInCart/@item.pID_SP">
+                                                    <i class="fa-solid fa-circle-minus"></i>Xóa
+                                                </a>
+                                            </div>
+                                            <div class="col-3 text-center"><a href="#"><i class="fa-solid fa-wrench"></i>Sửa</a></div>
+                                        </div>}
+                                    </div>
+                                
+                                    @*//Tông sản phẩm//*@
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-9" style="flex:1">
+                                                <strong>Tạm tính: @Model.tongSLSP()</strong>
+                                            </div>
+                                            <div class="col-3" style="color:red; font-size:16px; font-weight:700">
+                                                @String.Format("{0:#,##}", Model.TongThanhTien())
 
-
-                                        <div class="col-3" style="min-width:20px; text-align:center ">
-                                            <span style="text-decoration:line-through">
-                                                30.0000.0000
-                                            </span><br />
-                                            <span style="color:red; font-size:16px; font-weight:700">
-                                                20.0000.0000
-                                            </span>
-                                            @*<span style="width:40px; text-align:center">1</span>*@
-                                            <div class="d-flex justify-content-center">
-                                                <input class="text-center form-control-sm " min=0 max=999 style="width:80px" type="number" placeholder="1">
                                             </div>
                                         </div>
-
-                                    </div>
-                                    <div class="row d-flex justify-content-around ">
-                                        <div class="col-9 text-center"><a href="#">
-                                                                           <i class="fa-solid fa-circle-minus"></i>Xóa</a></div>
-                                        <div class="col-3 text-center"><a href="#"><i class="fa-solid fa-wrench"></i>Sửa</a></div>
                                     </div>
                                 </div>
-                            }
-
-                            @*//Tông sản phẩm//*@
-                            <div>
-                                <div class="row">
-                                    <div class="col-9" style="flex:1">
-                                        <strong>Tạm tính: 1</strong>
+                                @*//Thông tin khách hàng*@
+                                <div class="mb-4">
+                                    <div>
+                                        <h5>Thông tin khách hàng</h5>
                                     </div>
-                                    <div class="col-3" style="color:red; font-size:16px; font-weight:700">25.0000.0000</div>
+                                    <div class="d-flex mb-3">
+                                        <div class="form-check mx-3">
+                                            <input type="radio" class="form-check-input" id="Anh" name="optradio" value="option2">Anh
+                                            <label class="form-check-label" for="anh"></label>
+                                        </div>
+                                        <div class="form-check mb-3">
+                                            <input type="radio" class="form-check-input" id="Chi" name="optradio" value="option2">Chị
+                                            <label class="form-check-label" for="chi"></label>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <input class="form-control form-control-sm mb-2" type="text" placeholder="Họ và Tên">
+                                        <input class="form-control form-control-sm mb-2" type="number" placeholder="Số điện thoại">
+                                        <input class="form-control form-control-sm mb-2" type="text" placeholder="Dịa chỉ">
+                                    </div>
+                                    <div class="mb-3">
+                                        <h5>Yêu cầu khác:</h5>
+                                        <input class="form-control form-control-sm mb-2" type="text" placeholder="Yêu cầu">
+                                    </div>
+                                </div>
+                                @*//Hình thức thanh toán//*@
+                                <div class="mb-4">
+                                    <div>
+                                        <h5>Hình thức thanh toán</h5>
+                                    </div>
+                                    <div class=" mb-3">
+                                        <div class="form-check mb-2">
+                                            <input type="radio" class="form-check-input" id="Anh" name="optradio" value="option2">
+                                            <span style="font-size:14px; font-weight:600">Thanh toán online</span>
+                                            <label class="form-check-label" for="anh"></label>
+                                        </div>
+                                        <div class="form-check mb-3">
+                                            <input style="font-size:14px; font-weight:600" type="radio" class="form-check-input" id="Chi" name="optradio" value="option2"><span style="font-size:14px; font-weight:600">Thanh toán khi nhận hàng</span>
+                                            <label class="form-check-label" for="chi"></label>
+                                        </div>
+                                    </div>
 
                                 </div>
-                            </div>
-                        </div>
-                        @*//Thông tin khách hàng*@
-                        <div class="mb-4">
-                            <div>
-                                <h5>Thông tin khách hàng</h5>
-                            </div>
-                            <div class="d-flex mb-3">
-                                <div class="form-check mx-3">
-                                    <input type="radio" class="form-check-input" id="Anh" name="optradio" value="option2">Anh
-                                    <label class="form-check-label" for="anh"></label>
-                                </div>
-                                <div class="form-check mb-3">
-                                    <input type="radio" class="form-check-input" id="Chi" name="optradio" value="option2">Chị
-                                    <label class="form-check-label" for="chi"></label>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <input class="form-control form-control-sm mb-2" type="text" placeholder="Họ và Tên">
-                                <input class="form-control form-control-sm mb-2" type="number" placeholder="Số điện thoại">
-                                <input class="form-control form-control-sm mb-2" type="text" placeholder="Dịa chỉ">
-                            </div>
-                            <div class="mb-3">
-                                <h5>Yêu cầu khác:</h5>
-                                <input class="form-control form-control-sm mb-2" type="text" placeholder="Yêu cầu">
-                            </div>
-                        </div>
-                        @*//Hình thức thanh toán//*@
-                        <div class="mb-4">
-                            <div>
-                                <h5>Hình thức thanh toán</h5>
-                            </div>
-                            <div class=" mb-3">
-                                <div class="form-check mb-2">
-                                    <input type="radio" class="form-check-input" id="Anh" name="optradio" value="option2">
-                                    <span style="font-size:14px; font-weight:600">Thanh toán online</span>
-                                    <label class="form-check-label" for="anh"></label>
-                                </div>
-                                <div class="form-check mb-3">
-                                    <input style="font-size:14px; font-weight:600" type="radio" class="form-check-input" id="Chi" name="optradio" value="option2"><span style="font-size:14px; font-weight:600">Thanh toán khi nhận hàng</span>
-                                    <label class="form-check-label" for="chi"></label>
-                                </div>
-                            </div>
 
-                        </div>
+                                <div class="mb-5">
+                                        <div class="row">
+                                            <div class="col-9" style="flex:1">
+                                                <strong>Tổng Tiền:</strong>
 
-                        <div class="mb-5">
-                            <div class="row">
-                                <div class="col-9" style="flex:1">
-                                    <strong>Tổng Tiền:</strong>
+                                            </div>
+                                            <div class="col-3">
 
-                                </div>
-                                <div class="col-3">
+                                                <span style="color:red; font-size:16px; font-weight:700">@String.Format("{0:#,##}", @Model.TongThanhTien())</span>
+                                            </div>
 
-                                    <span style="color:red; font-size:16px; font-weight:700">25.0000.0000</span>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="w-100 d-flex justify-content-center"><button type="button" class="btn btn-primary w-75">Đặt Hàng</button></div>
-                    </div>
+                                        </div>
+                                    </div>
+                                <div class="w-100 d-flex justify-content-center"><button type="button" class="btn btn-primary w-75">Đặt Hàng</button></div>
+                            </div>}
                 </form>
             </div>
         </div>

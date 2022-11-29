@@ -1,13 +1,16 @@
-﻿@using Web_DienMayXanh.Models;
+﻿
+@*@using Web_DienMayXanh.Models;*@
 @{
     ViewData["Title"] = "CustomerHome";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var spBC = ViewBag.spNB as List<QL_SanPham>;
-    var spNB1 = ViewBag.spNB1 as List<QL_SanPham>;
-    var spNB2 = ViewBag.spNB2 as List<QL_SanPham>;
+    var spBC = ViewBag.spNB;
+    var spNB1 = ViewBag.spNB1;
+    var spNB2 = ViewBag.spNB2;
+    var spGG = ViewBag.spGG;
+    var dsTheoGia = ViewBag.dsTheoGG;
 
 }
-@model List<QL_SanPham>
+@model IEnumerable<Web_DienMayXanh.Models.ProductJoinPrice>
 <div class="wrapper-product">
     <div class="" style="padding-top:10px">
         <a href="#">
@@ -42,25 +45,25 @@
             </div>
 
             <div class=" g-4 mx-auto owl-carousel owl-carousel-1 owl-theme" style="padding-bottom:50px">
-                @foreach (QL_SanPham SANPHAM in Model)
+                @*@foreach (QL_SanPham SANPHAM in Model)
+                    {*@
+                @foreach (var item in Model)
                 {
-
                     <div class=" product-item-sale">
-                        <a class="product-hover" href="/Customer/ModalProduct/?ID_SP=@SANPHAM.ID_SP" >
+                        <a class="product-hover" href="/Customer/ModalProduct/?ID_SP=@item.SanPhammv.ID_SP">
                             <div class="list-product-sale bg-light" style="padding: 10px; text-align:center">
 
                                 <div class="list-product-img mb-3">
                                     <div>
-                                        <img class="img-product" src="@SANPHAM.HINH_SP" />
+                                        <img class="img-product" src="@item.SanPhammv.HINH_SP" />
                                     </div>
                                 </div>
                                 <div class="mb-3" style="padding:0 0 0 15px">
-                                    <span style="font-size:16px; font-weight:700">@SANPHAM.TenSP</span>
+                                    <span style="font-size:16px; font-weight:700">@item.SanPhammv.TenSP</span>
                                 </div>
                                 <div class="mb-3">
                                     <div class="d-block">
-                                        <span style="font-size:16px; color:#000000 ;font-weight:500;text-decoration:line-through">@SANPHAM.DG_Ban</span><br />
-                                        <span style="font-size:16px; color:red ;font-weight:700">@SANPHAM.DG_Ban</span>
+                                        <span style="font-size:16px; color:#000000 ;font-weight:500;text-decoration:line-through">@item.SanPhammv.DG_Ban</span><br />
                                     </div>
 
                                 </div>
@@ -68,20 +71,20 @@
                                     <div class="w-75 d-flex justify-content-around" style="background-color: #f7c913; position: relative; border-radius: 10px;">
                                         <i class="fa-solid fa-fire" style="color: #ff7403; position:absolute; font-size:32px; left:0; top:-10px "></i>
 
-                                        <span class="" style="flex:1; font-size:14px; font-weight:500">sale 30%</span>
+                                        <span class="" style="flex:1; font-size:14px; font-weight:500">sale còn @item.GiamGiamv.MucGiamGia</span>
                                     </div>
                                 </div>
                             </div>
                         </a>
                     </div>
-                }
+                }@*}*@
             </div>
 
         </div>
 
 
         <div class="row d-block">
-            <div class="row mb-4"style="border-bottom: 2px solid #ffec00;">
+            <div class="row mb-4" style="border-bottom: 2px solid #ffec00;">
                 <div class="col-10">
                     <h4>Sản Phẩm Bán Chạy</h4>
                 </div>
@@ -125,25 +128,26 @@
 
                 {@*<button type="button" class="btn" data-toggle="modal" data-target="#exampleModalScrollable" style="border:none">*@
                 <div class=" " style="width:224px">
-                    
+
                     <div class="  list-product" style="margin:10px">
-                        <a class="product-hover" href="/Customer/ModalProduct/?ID_SP=@spNB.ID_SP">
+                        <a class="product-hover mt-4" href="/Customer/ModalProduct/?ID_SP=@spNB.SanPhammv.ID_SP">
                             <div class=" list-product-img">
                                 <div style="display: flex; justify-content: center;">
-                                    <img class="img-product" style="width:166px" src="@spNB.HINH_SP" />
+                                    <img class="img-product" style="width:166px" src="@spNB.SanPhammv.HINH_SP" />
                                 </div>
                             </div>
                             <div class="" style="padding:0 0 0 15px">
-                                <span style="font-size:14px; font-weight:500">@spNB.TenSP</span>
+                                <span style="font-size:14px; font-weight:500">@spNB.SanPhammv.TenSP</span>
                             </div>
                         </a>
                         <div class="row">
                             <div class="col-8">
 
-                                <span style="font-size:16px; font-weight:700">@spNB.DG_Ban đ</span>
+                                <span style="font-size: 14px; font-weight: 500; text-decoration: line-through">@spNB.SanPhammv.DG_Ban</span>
+                                <span class="" style="flex: 1; font-size: 16px; font-weight: 700; color: red">@spNB.GiamGiamv.MucGiamGia</span>
                             </div>
                             <div class="col-4">
-                                <a href="/Customer/ChonMua/@spNB.ID_SP" class="btn btn-primary" style="font-size:8px">
+                                <a href="/Customer/ChonMua/@spNB.SanPhammv.ID_SP" class="btn btn-primary" style="font-size:8px">
                                     <i class="fa-solid fa-cart-shopping"></i>
                                 </a>
                             </div>
@@ -153,8 +157,8 @@
 
                     </div>
 
-                    
-                    
+
+
                 </div>}
             </div>
             @*</button>*@
@@ -186,169 +190,181 @@
                 </div>
             </div>
             <div class="row">
-                @foreach (var NB1 in spNB1) {
-                <div class="col leftFeatured">
-                    
-                    <div class="h-100">
-                        
-                        <div class="d-flex align-items-center">
-                            <a class="product-hover text-dark" href="/Customer/ModalProduct/?ID_SP=@NB1.ID_SP">
-                                <div class=" ">
+                @foreach (var NB1 in spNB1)
+                {
+                    <div class="col leftFeatured">
 
-                                        <img style="width:100%" src="@NB1.HINH_SP" />
+                        <div class="h-100">
+
+                            <div class="d-flex align-items-center">
+                                <a class="product-hover mt-4 text-dark" href="/Customer/ModalProduct/?ID_SP=@NB1.SanPhammv.ID_SP">
+                                    <div class=" ">
+
+                                        <img style="width:100%" src="@NB1.SanPhammv.HINH_SP" />
+
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="text-center" style="padding-left:70px">
+                                <div class="" style="margin-top: 40px; margin-bottom: 20px">
+                                    <span style="font-size: 28px; font-weight: 700; color: #343a40">@NB1.SanPhammv.TenSP</span>
+                                </div>
+                                <div class="" style="padding-bottom:15px">
+                                    <span class="textContent" style="font-size: 14px; font-weight: 500;">
+                                        @NB1.SanPhammv.Mota_SP
+                                    </span>
+                                </div>
+                                <div class="" style="margin-bottom: 20px">
+                                    <div class="">
+                                        <span style="font-size:16px; font-weight:700; text-decoration:line-through">@NB1.SanPhammv.DG_Ban </span><br />
+
+                                    </div>
 
                                 </div>
-                            </a>
-                        </div>
-                        
-                        <div class="" style="padding-left:70px">
-                            <div class="" style="margin-top: 40px; margin-bottom: 20px">
-                                <span style="font-size: 28px; font-weight: 700; color: #007bff">@NB1.TenSP</span>
-                            </div>
-                            <div class="" style="padding-bottom:15px">
-                                <span class="textContent">
-                                    @NB1.Mota_SP
-                                </span>
-                            </div>
-                            <div class="" style="margin-bottom: 20px">
-                                <div class="">
-                                    <span style="font-size:24px; font-weight:700">@NB1.DG_Ban đ</span>
-                                </div>
-                            </div>
+                                <div class="d-flex justify-content-center">
+                                    <div class="w-75 d-flex justify-content-around text-center" style="background-color: #f7c913; position: relative; border-radius: 10px;">
+                                        <i class="fa-solid fa-fire" style="color: #ff7403; position:absolute; font-size:32px; left:0; top:-10px "></i>
 
-                            @*<div class="row" style="margin-bottom:10px">
+                                        <span class="" style="flex:1; font-size:18px; font-weight:700">sale còn @NB1.GiamGiamv.MucGiamGia</span>
+                                    </div>
+                                </div>
+                                @*<div class="row" style="margin-bottom:10px">
             <label type="button" class="btn btn-primary" style="width:50%; height: 50px">
                 <i class="fa-solid fa-cart-shopping" style="font-size:22px"></i>
             </label>
         </div>*@
+                            </div>
                         </div>
-                    </div>
-                        
+
                     </div>}
-                <div class="col">
+                <div class="col d-flex align-items-center" >
                     <div class="d-flex flex-lg-wrap">
-                        @foreach (var NB2 in spNB2) {
-                        <div class=" list-product listFeaturedRight text-dark" style="padding: 25px; width: 260px; border-radius: 10px;">
-                            <a class="product-hover text-dark" href="/Customer/ModalProduct/?ID_SP=@NB2.ID_SP">
-                                <div class="row list-product-img">
-                                    <div>
-                                        <img style="width:166px" src="@NB2.HINH_SP" />
+                        @foreach (var NB2 in spNB2)
+                        {
+                            <div class=" list-product listFeaturedRight text-dark" style="padding: 25px; width: 260px; border-radius: 10px;">
+                                <a class="product-hover text-dark" href="/Customer/ModalProduct/?ID_SP=@NB2.SanPhammv.ID_SP">
+                                    <div class="row list-product-img">
+                                        <div>
+                                            <img style="width:166px" src="@NB2.SanPhammv.HINH_SP" />
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
+                                </a>
                                 <div class="row" style="padding:0 0 0 15px">
-                                    <span style="font-size:14px; font-weight:500">@NB2.TenSP</span>
+                                    <span style="font-size:14px; font-weight:500">@NB2.SanPhammv.TenSP</span>
                                 </div>
                                 <div class="row">
                                     <div class="col-8">
 
-                                        <span style="font-size:16px; font-weight:700">@NB2.DG_Ban đ</span>
+                                        <span style="font-size:16px; font-weight:700">@NB2.SanPhammv.DG_Ban</span>
+                                        <span class="" style="flex: 1; font-size: 16px; font-weight: 700; color: red">@NB2.GiamGiamv.MucGiamGia</span>
+
                                     </div>
                                     <div class="col-4">
-                                        <a href="/Customer/ChonMua/@NB2.ID_SP" class="btn btn-primary" style="font-size:8px">
+                                        <a href="/Customer/ChonMua/@NB2.SanPhammv.ID_SP" class="btn btn-primary" style="font-size:8px">
                                             <i class="fa-solid fa-cart-shopping"></i>
                                         </a>
                                     </div>
                                 </div>
-   
+
 
                             </div>}
-                            @*<div class="col  list-product listFeaturedRight" style="padding: 10px">
-            <div class="row list-product-img">
-                <div>
-                    <img style="width:166px" src="	https://cdn.tgdd.vn/Products/Images/42/289663/iPhone-14-plus-thumb-den-600x600.jpg" />
-                </div>
-            </div>
-            <div class="row" style="padding:0 0 0 15px">
-                <span style="font-size:14px; font-weight:500">IPhone 14 Pro-max</span>
-            </div>
-            <div class="row">
-                <div class="col-8">
+                        @*<div class="col  list-product listFeaturedRight" style="padding: 10px">
+                                <div class="row list-product-img">
+                                    <div>
+                                        <img style="width:166px" src="	https://cdn.tgdd.vn/Products/Images/42/289663/iPhone-14-plus-thumb-den-600x600.jpg" />
+                                    </div>
+                                </div>
+                                <div class="row" style="padding:0 0 0 15px">
+                                    <span style="font-size:14px; font-weight:500">IPhone 14 Pro-max</span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-8">
 
-                    <span style="font-size:16px; font-weight:700">32.000.000đ</span>
-                </div>
-                <div class="col-4">
-                    <button type="button" class="btn btn-primary" style="font-size:8px">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col" style="justify-content:center">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                </div>
-            </div>
+                                        <span style="font-size:16px; font-weight:700">32.000.000đ</span>
+                                    </div>
+                                    <div class="col-4">
+                                        <button type="button" class="btn btn-primary" style="font-size:8px">
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col" style="justify-content:center">
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                    </div>
+                                </div>
 
-        </div>*@
-                        </div>
+                            </div>*@
+                    </div>
                     @*<div class="row">
-                        <div class="col  list-product listFeaturedRight" style="padding: 10px">
-                            <div class="row list-product-img">
-                                <div>
-                                    <img style="width:166px" src="	https://cdn.tgdd.vn/Products/Images/42/289663/iPhone-14-plus-thumb-den-600x600.jpg" />
+                            <div class="col  list-product listFeaturedRight" style="padding: 10px">
+                                <div class="row list-product-img">
+                                    <div>
+                                        <img style="width:166px" src="	https://cdn.tgdd.vn/Products/Images/42/289663/iPhone-14-plus-thumb-den-600x600.jpg" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row" style="padding:0 0 0 15px">
-                                <span style="font-size:14px; font-weight:500">IPhone 14 Pro-max</span>
-                            </div>
-                            <div class="row">
-                                <div class="col-8">
+                                <div class="row" style="padding:0 0 0 15px">
+                                    <span style="font-size:14px; font-weight:500">IPhone 14 Pro-max</span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-8">
 
-                                    <span style="font-size:16px; font-weight:700">32.000.000đ</span>
+                                        <span style="font-size:16px; font-weight:700">32.000.000đ</span>
+                                    </div>
+                                    <div class="col-4">
+                                        <button type="button" class="btn btn-primary" style="font-size:8px">
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="col-4">
-                                    <button type="button" class="btn btn-primary" style="font-size:8px">
-                                        <i class="fa-solid fa-cart-shopping"></i>
-                                    </button>
+                                <div class="row">
+                                    <div class="col" style="justify-content:center">
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col" style="justify-content:center">
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                </div>
-                            </div>
 
-                        </div>
-                        <div class="col  list-product listFeaturedRight" style="padding: 10px">
-                            <div class="row list-product-img">
-                                <div>
-                                    <img style="width:166px" src="	https://cdn.tgdd.vn/Products/Images/42/289663/iPhone-14-plus-thumb-den-600x600.jpg" />
+                            </div>
+                            <div class="col  list-product listFeaturedRight" style="padding: 10px">
+                                <div class="row list-product-img">
+                                    <div>
+                                        <img style="width:166px" src="	https://cdn.tgdd.vn/Products/Images/42/289663/iPhone-14-plus-thumb-den-600x600.jpg" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row" style="padding:0 0 0 15px">
-                                <span style="font-size:14px; font-weight:500">IPhone 14 Pro-max</span>
-                            </div>
-                            <div class="row">
-                                <div class="col-8">
+                                <div class="row" style="padding:0 0 0 15px">
+                                    <span style="font-size:14px; font-weight:500">IPhone 14 Pro-max</span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-8">
 
-                                    <span style="font-size:16px; font-weight:700">32.000.000đ</span>
+                                        <span style="font-size:16px; font-weight:700">32.000.000đ</span>
+                                    </div>
+                                    <div class="col-4">
+                                        <button type="button" class="btn btn-primary" style="font-size:8px">
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="col-4">
-                                    <button type="button" class="btn btn-primary" style="font-size:8px">
-                                        <i class="fa-solid fa-cart-shopping"></i>
-                                    </button>
+                                <div class="row">
+                                    <div class="col" style="justify-content:center">
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col" style="justify-content:center">
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                </div>
-                            </div>
 
-                        </div>
-                    </div>*@
+                            </div>
+                        </div>*@
                 </div>
             </div>
         </div>
