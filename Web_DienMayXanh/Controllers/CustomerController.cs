@@ -11,17 +11,34 @@ namespace Web_DienMayXanh.Controllers
     {
         QL_DMXModel ql = new QL_DMXModel();
         // GET: Customer
+        
+        
         [HttpGet]
         public ActionResult CustomerHome()
         {
+           
             List<QL_SanPham> dsSP = ql.QL_SanPham.Take(4).ToList();
+
+            ViewBag.dsTheoGG = ql.QL_SanPham.OrderBy(spgg=>spgg.ID_GiamGia);
+
             List<QL_SanPham> dsBC = ql.QL_SanPham.Take(10).ToList();
-            List<QL_SanPham> dsNB1 = ql.QL_SanPham.Take(1).ToList();
-            List<QL_SanPham> dsNB2 = ql.QL_SanPham.Take(4).ToList();
-            ViewBag.spNB = dsBC;
-            ViewBag.spNB1 = dsNB1;
-            ViewBag.spNB2 = dsNB2;
-            return View(dsSP);
+            List<GiamGia> dsGG = ql.GiamGias.Take(10).ToList();
+
+ 
+            ViewBag.spGG = dsGG;
+
+            //join///
+            List<QL_SanPham> sp = ql.QL_SanPham.ToList();
+            List<GiamGia> gg = ql.GiamGias.ToList(); ;
+            var ProductJoinGG = from s in sp join st in gg on s.ID_GiamGia equals st.ID_GiamGia into st2 from st in st2.DefaultIfEmpty() select new ProductJoinPrice { SanPhammv = s, GiamGiamv = st };
+            var spNB = from s in sp join st in gg on s.ID_GiamGia equals st.ID_GiamGia into st2 from st in st2.DefaultIfEmpty() select new ProductJoinPrice { SanPhammv = s, GiamGiamv = st };
+            ViewBag.spNB = spNB.Take(10).ToList();
+            var dsNB1 = from s in sp join st in gg on s.ID_GiamGia equals st.ID_GiamGia into st2 from st in st2.DefaultIfEmpty() select new ProductJoinPrice { SanPhammv = s, GiamGiamv = st };
+            ViewBag.spNB1 = dsNB1.OrderByDescending(t=>t.SanPhammv.DG_Ban).Take(1).ToList();
+            var dsNB2 = from s in sp join st in gg on s.ID_GiamGia equals st.ID_GiamGia into st2 from st in st2.DefaultIfEmpty() select new ProductJoinPrice { SanPhammv = s, GiamGiamv = st };
+            ViewBag.spNB2 = dsNB2.OrderByDescending(t => t.SanPhammv.DG_Ban).Take(4).ToList();
+
+            return View(ProductJoinGG);
         }
 
         //Menu dropDown//
@@ -79,8 +96,10 @@ namespace Web_DienMayXanh.Controllers
         [HttpPost]
         public ActionResult ViewAllProduct(FormCollection colselect)
         {
-            List<QL_SanPham> dsBC = ql.QL_SanPham.ToList();
-            ViewBag.lsHang = dsBC;
+            List<QL_SanPham> sp = ql.QL_SanPham.ToList();
+            List<GiamGia> gg = ql.GiamGias.ToList(); ;
+            var ProductJoinGG = from s in sp join st in gg on s.ID_GiamGia equals st.ID_GiamGia into st2 from st in st2.DefaultIfEmpty() select new ProductJoinPrice { SanPhammv = s, GiamGiamv = st };
+            ViewBag.lsHang = ProductJoinGG;
             string tk = colselect["txtSelect"].ToString();
             ViewBag.GiaSort = String.IsNullOrEmpty(tk) ? "thap-cao" : "";
             ViewBag.GiaSort = String.IsNullOrEmpty(tk) ? "thap-cao" : "";
@@ -88,15 +107,16 @@ namespace Web_DienMayXanh.Controllers
             switch (tk)
             {
                 case "thap-cao":
-                    List<QL_SanPham> gia = ql.QL_SanPham.OrderBy(n => n.DG_Ban).ToList();
+                   
+                    var gia = ProductJoinGG.OrderBy(n => n.SanPhammv.DG_Ban).ToList();
                     return View(gia);
 
                 case "cao-thap":
-                    List<QL_SanPham> giat = ql.QL_SanPham.OrderByDescending(n => n.DG_Ban).ToList();
+                    var giat = ProductJoinGG.OrderByDescending(n => n.SanPhammv.DG_Ban).ToList();
                     return View(giat);
                 default:
                     ViewBag.Success = "vui lòng chọn Lọc!!";
-                    return View(dsBC);
+                    return View(ProductJoinGG);
             }
 
 
@@ -104,8 +124,10 @@ namespace Web_DienMayXanh.Controllers
         [HttpPost]
         public ActionResult ViewAllProductBC()
         {
-            List<QL_SanPham> dsSP = ql.QL_SanPham.ToList();
-            return View("ViewAllProduct", dsSP);
+            List<QL_SanPham> sp = ql.QL_SanPham.ToList();
+            List<GiamGia> gg = ql.GiamGias.ToList(); ;
+            var ProductJoinGG = from s in sp join st in gg on s.ID_GiamGia equals st.ID_GiamGia into st2 from st in st2.DefaultIfEmpty() select new ProductJoinPrice { SanPhammv = s, GiamGiamv = st };
+            return View("ViewAllProduct", ProductJoinGG);
 
         }
         [HttpPost]
@@ -152,8 +174,18 @@ namespace Web_DienMayXanh.Controllers
         {
             //ID_SP = "1614";
             //Lấy thông tin sản phẩm//
-            QL_SanPham mH = ql.QL_SanPham.FirstOrDefault(t => t.ID_SP == ID_SP);
-            return View(mH);
+            //GiamGia gg = ql.GiamGias.FirstOrDefault();
+            //QL_SanPham sp = ql.QL_SanPham.FirstOrDefault(t=>t.ID_SP==ID_SP && t.ID_GiamGia == gg.ID_GiamGia);
+
+
+             
+            List<QL_SanPham> sp = ql.QL_SanPham.Where(t => t.ID_SP == ID_SP).ToList();
+            List<GiamGia> gg = ql.GiamGias.ToList(); ;
+            var ProductJoinGG =from s in sp join st in gg on s.ID_GiamGia equals st.ID_GiamGia into st2 from st in st2.DefaultIfEmpty() select new ProductJoinPrice { SanPhammv = s, GiamGiamv = st };
+            List<QL_SanPham> spLQ = ql.QL_SanPham.ToList();
+            var ProductJoinLQ = (from s in spLQ join st in gg on s.ID_GiamGia equals st.ID_GiamGia into st2 from st in st2.DefaultIfEmpty() select new ProductJoinPrice { SanPhammv = s, GiamGiamv = st }).Where(n=>n.SanPhammv.ID_Hang.Contains(ProductJoinGG.Select(t=>t.SanPhammv.ID_Hang).FirstOrDefault())==true).Take(10).ToList();
+            ViewBag.dsLQ = ProductJoinLQ;
+            return View(ProductJoinGG);
         }
 
         //Gio hang//
@@ -169,7 +201,20 @@ namespace Web_DienMayXanh.Controllers
             Session["GioHang"] = gh;
             return RedirectToAction("CustomerHome", "Customer");
         }
-        
+        //Xoa Product ra gio hang//
+        [HttpGet]
+        public ActionResult XoaProductInCart(string id)
+        {
+            
+            GioHang gh = Session["GioHang"] as GioHang;
+
+            if (gh.Xoa(id) == -1) {
+                Response.Redirect("~/PageError.html");
+            }
+            Session["GioHang"] = gh;
+            return RedirectToAction("CartProduct", "Customer");
+        }
+
         [HttpGet]
         public ActionResult CartProduct()
         {
@@ -177,5 +222,27 @@ namespace Web_DienMayXanh.Controllers
 
             return View(gh);
         }
+        //Sửa 
+        //public int Sua(string pMaMH, int pSoLuong)
+        //{
+        //    HoaDon mh = lst.Find(n => n.pmaMH == pMaMH);
+        //    if (mh != null)
+        //    {
+        //        mh.soLuong = pSoLuong;
+        //        return 1;
+        //    }
+        //    return -1;
+        //}
+
+
+        //Xoa all//
+        [HttpGet]
+        public ActionResult XoaGioHang()
+        {
+            GioHang gh = Session["GioHang"] as GioHang;
+            gh.xoaALLGio();
+            return RedirectToAction("CartProduct", "Customer");
+        }
+
     }
 }

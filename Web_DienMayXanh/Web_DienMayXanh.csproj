@@ -146,6 +146,7 @@
     <Compile Include="Models\GiamGia.cs" />
     <Compile Include="Models\HoaDon.cs" />
     <Compile Include="Models\PhuongThucThanhToan.cs" />
+    <Compile Include="Models\ProductJoinPrice.cs" />
     <Compile Include="Models\QL_BaoHanh.cs" />
     <Compile Include="Models\QL_CT_HDB.cs" />
     <Compile Include="Models\QL_CT_HDN.cs" />

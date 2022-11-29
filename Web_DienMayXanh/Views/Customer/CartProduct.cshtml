@@ -7,13 +7,13 @@
 @model GioHang
 
 <div class="container">
-    <div class="mb-5" style=" padding: 0 20% 0 20%; min-height: 710px; ">
+    <div class="mb-5" style=" padding: 0 20% 0 20%; min-height: 675px; ">
         <div style="background: #fff; box-shadow: 0 0 18px rgb(0 0 0 / 12%); border-radius: 5px; padding: 0 40px 40px 40px; ">
             <div class="">
                 <form action="#" method="post">
                     @if (Model == null || Model.soSanPham() == 0)
                     {
-                        <p>Giỏ Hàng trống!!</p>
+                        <p style="font-size: 14px; font-weight: 700; margin-top: 20px; height: 50px; display: flex; justify-content: center; align-items: center;">Giỏ Hàng trống!!</p>
                     }
                     else
                     {
@@ -22,7 +22,7 @@
                                 <a class="nav-link" href="#">Lịch sử mua hàng</a>
                             </div>
                             <div>
-                                <a class="nav-link" href="#">Xoá giỏ hàng</a>
+                                <a class="nav-link" href="/Customer/XoaGioHang">Xoá giỏ hàng</a>
                             </div>
                         </div>
 
@@ -33,7 +33,7 @@
                                
                                 <div class="mb-2" style="border-bottom: 1px solid rgba(168,208,255,.38);">
                                     @foreach (HoaDon item in Model.lst)
-                                    {
+                                    {  
                                         <div class="row d-flex">
                                             <div class="col-3"><img src="@item.pHinh_SP" style="width:130px; height:130px" /></div>
                                             <div class="col-6" style="width:340px">
@@ -51,14 +51,14 @@
                                                 </span>
                                                 @*<span style="width:40px; text-align:center">1</span>*@
                                                 <div class="d-flex justify-content-center">
-                                                    <span>@Model.soSanPham()</span>
+                                                    <span>@item.pSL_SP</span>
                                                 </div>
                                             </div>
 
                                         </div>
                                         <div class="row d-flex justify-content-around ">
                                             <div class="col-9 text-center">
-                                                <a href="#">
+                                                <a  href="/Customer/XoaProductInCart/@item.pID_SP">
                                                     <i class="fa-solid fa-circle-minus"></i>Xóa
                                                 </a>
                                             </div>

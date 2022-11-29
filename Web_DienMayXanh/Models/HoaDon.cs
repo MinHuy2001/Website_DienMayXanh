@@ -34,7 +34,7 @@ namespace Web_DienMayXanh.Models
             if (mh != null)
             {
                 pID_Hang = mh.ID_Hang;
-                pID_SP = mh.ID_SP;
+                pID_SP = maMH;
                 pID_DM_SP = mh.ID_DM_SP;
                 pTenSP = mh.TenSP;
                 pSL_SP = 1 + pSL_SP;
@@ -98,12 +98,12 @@ namespace Web_DienMayXanh.Models
             return pTT;
         }
         ////Them vào hd//
-        public int them(string pID_SP)
+        public int them(string ID_SP)
         {
-            HoaDon mh = lst.Find(n => n.pID_SP == pID_SP);
+            HoaDon mh = lst.Find(n => n.pID_SP == ID_SP);
             if (mh == null)
             {
-                HoaDon mhnew = new HoaDon(pID_SP);
+                HoaDon mhnew = new HoaDon(ID_SP);
                 if (mhnew == null)
                 {
                     return -1;
@@ -117,16 +117,16 @@ namespace Web_DienMayXanh.Models
             return -1;
         }
         ////xóa///
-        //public int Xoa(string pMaMH)
-        //{
-        //    HoaDon mh = lst.Find(n => n.pmaMH == pMaMH);
-        //    if (mh != null)
-        //    {
-        //        lst.Remove(mh);
-        //        return 1;
-        //    }
-        //    return -1;
-        //}
+       public int Xoa(string ID_SP)
+        {
+            HoaDon mh = lst.Find(n => n.pID_SP == ID_SP);
+            if (mh != null)
+            {
+                lst.Remove(mh);
+                return 1;
+            }
+            return -1;
+        }
 
         ////Sửa//
         //public int Sua(string pMaMH, int pSoLuong)
@@ -140,10 +140,10 @@ namespace Web_DienMayXanh.Models
         //    return -1;
         //}
         ////Xóa cả giỏ hàng//
-        //public void xoaALLGio()
-        //{
-        //    lst.Clear();
-        //}
+        public void xoaALLGio()
+        {
+            lst.Clear();
+        }
     }
 
 }
