@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Web_DienMayXanh.Models;
+using PagedList;
+using System.Web.UI;
 
 namespace Web_DienMayXanh.Controllers
 {
@@ -130,26 +132,38 @@ namespace Web_DienMayXanh.Controllers
             return View("ViewAllProduct", ProductJoinGG);
 
         }
-        [HttpPost]
-        public ActionResult ViewAllProductToMenu(string ID_DM)
+        [HttpGet]
+        public ActionResult ViewAllProductToMenu(string ID_DM, int? page)
         {
-            List<QL_SanPham> dsProduct = ql.QL_SanPham.Where(t => t.ID_DM_SP == ID_DM).ToList();
-            return View("ProductToMenu", dsProduct);
+            //List<QL_SanPham> dsProduct = ql.QL_SanPham.Where(t => t.ID_DM_SP == ID_DM).ToList();
 
+            if (page == null) page = 1;
+            var products = ql.QL_SanPham.Where(t => t.ID_DM_SP == ID_DM).OrderBy(t=>t.ID_SP);
+            
+            int pageNumber = (page ?? 1);
+            int pageSize = 15;
+            //return View("ProductToMenu", dsProduct);
+            return View (products.ToPagedList(pageNumber, pageSize));
         }
+
+
         public ActionResult Product()
         {
             return View();
         }
  
         [HttpPost]
-        public ActionResult XyLyTimKiem(FormCollection col)
-        {
+        public ActionResult XyLyTimKiem(FormCollection col, int ? page)
+         {
             string tk = col["txtTimKiem"].ToString();
 
-            List<QL_SanPham> ds = ql.QL_SanPham.Where(t => t.TenSP.Contains(tk) == true).ToList(); ;
+            //List<QL_SanPham> ds = ql.QL_SanPham.Where(t => t.TenSP.Contains(tk) == true).ToList(); 
+            if (page == null) page = 1;
+            var products = ql.QL_SanPham.Where(t => t.TenSP.Contains(tk) == true).OrderBy(t => t.ID_SP);
+            int pageNumber = (page ?? 1);
+            int pageSize = 15;
 
-            return View(ds);
+            return View(products.ToPagedList(pageNumber, pageSize));
         }
 
         //[HttpPost]
@@ -244,5 +258,19 @@ namespace Web_DienMayXanh.Controllers
             return RedirectToAction("CartProduct", "Customer");
         }
 
+
+
+        public JsonResult ListName(string q)
+           {
+            
+            var data = ql.QL_SanPham.Where(x => x.TenSP.Contains(q)==true).Select(x=>x.TenSP);
+            return Json(new
+            {
+                data = data,
+                status = true,
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+       
     }
 }

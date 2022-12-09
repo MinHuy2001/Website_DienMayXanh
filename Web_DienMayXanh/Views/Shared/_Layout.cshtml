@@ -13,12 +13,10 @@
     <link rel="stylesheet" href="~/content/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/content/lib/owlCaroousel/owl.theme.default.css" />
     <link rel="stylesheet" href="~/content/lib/owlCaroousel/owl.carousel.css" />
-
-
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,700&display=swap" />
+    <link href="https://code.jquery.com/ui/1.12.1/themes/ui-lightness/jquery-ui.css"rel="stylesheet" />
 
     @using Web_DienMayXanh.Models;
 </head>
@@ -69,12 +67,14 @@
                         <div class="col-4">
                             <div class="row">
                                 <div class="col input-group">
-                                    <form action="/Customer/XyLyTimKiem" method="post" class="d-flex position-relative" style="width:100%">
-                                        <input type="text" name="txtTimKiem" class="form-control border rounded" style="height:32px; font-size:14px" placeholder="Nhập sản phẩm..." aria-label="search-product">
+                                    <form action="/Customer/XyLyTimKiem/" method="post" class="d-flex position-relative" style="width:100%">
+                                        <input id="txtKeyword"  class="form-control border rounded" type="text" name="txtTimKiem" style="height:32px; font-size:14px" placeholder="Nhập sản phẩm..." aria-label="search-product">
                                         <button class="btn btn-item position-absolute" style="right:0; top:-3px" type="submit">
                                             <i class="fa-solid fa-magnifying-glass" style="color:black; font-size:14px"></i>
                                         </button>
                                     </form>
+
+
                                 </div>
                             </div>
                         </div>
@@ -275,12 +275,13 @@
             </div>
         </div>
     </div>
+
     <script src="~/content/lib/jquery/dist/jquery.min.js"></script>
+
     <script src="~/content/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/content/js/site.js" asp-append-version="true"></script>
     <script src="~/content/js/site.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- owl carousel -->
     <script type="text/javascript">
         $(document).ready(function () {
@@ -330,13 +331,70 @@
                 //    }
                 //}
             })
+
+
+
         });
 
 
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="~/content/lib/jquery-ui.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var common = {
+                init: function () {
+                    common.registerEvent();
+                },
+                registerEvent: function () {
+                    $("#txtKeyword").autocomplete({
+                        source: function (request, response) {
+                            $.ajax({
+                                url: "/Customer/ListName",
+                                type:"GET",
+                                dataType: "json",
+                                data: {
+                                    q: request.term
+                                },
+                                success: function (res) {
+                                    console.log(res)
+                                    response($.map(res.data, function (item) {
+                                        
+                                        return {
+                                          
+                                        }
+                                    }));
+                                }
+                            });
+                        },
+                        focus: function (event, ui) {
+                            $("#txtKeyword").val(ui.item.label);
+                            return false;
+                        },
+                        select: function (event, ui) {
+                            $("#txtKeyword").val(ui.item.label);
 
+                            return false;
+                        }
+                    })
+                        .autocomplete("instance")._renderItem = function (ul, item) {
+                            return $("<li>")
+                                .append("<div>" + item.label+ "</div>")
+                                .appendTo(ul);
+                        };
+                }
+            }
+
+            common.init();
+        });
+
+    </script>
 
     <script src="~/content/lib/owlCaroousel/owl.carousel.js"></script>
+    <script src="~/content/lib/JavaScript.js"></script>
+    <script src="~/content/lib/jquery-ui.js"></script>
+
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>
