@@ -69,5 +69,8 @@ namespace Web_DienMayXanh.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QL_BaoHanh> QL_BaoHanh { get; set; }
+
+
+
     }
 }

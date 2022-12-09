@@ -78,3 +78,7 @@ C:\Users\minhh\IT\KhoaLuan\Web_DienMayXanh\Web_DienMayXanh\bin\EntityFramework.x
 C:\Users\minhh\IT\KhoaLuan\Web_DienMayXanh\Web_DienMayXanh\bin\EntityFramework.SqlServer.xml
 C:\Users\minhh\IT\KhoaLuan\Web_DienMayXanh\Web_DienMayXanh\bin\Microsoft.Configuration.ConfigurationBuilders.Base.xml
 C:\Users\minhh\IT\KhoaLuan\Web_DienMayXanh\Web_DienMayXanh\bin\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.xml
+C:\Users\minhh\IT\KhoaLuan\web_DienMayXanh\Web_DienMayXanh\bin\PagedList.dll
+C:\Users\minhh\IT\KhoaLuan\web_DienMayXanh\Web_DienMayXanh\bin\PagedList.Mvc.dll
+C:\Users\minhh\IT\KhoaLuan\web_DienMayXanh\Web_DienMayXanh\bin\PagedList.xml
+C:\Users\minhh\IT\KhoaLuan\web_DienMayXanh\Web_DienMayXanh\bin\PagedList.Mvc.xml

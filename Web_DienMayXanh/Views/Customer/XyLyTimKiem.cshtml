@@ -1,9 +1,11 @@
 ﻿@using Web_DienMayXanh.Models;
+@model PagedList.IPagedList<Web_DienMayXanh.Models.QL_SanPham>
 @{
     ViewBag.Title = "XyLyTimKiem";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model List<QL_SanPham>
+@using PagedList.Mvc;
+@*@model List<QL_SanPham>*@
 <div class="container">
     <div class="" style="min-height:720px">
         <div class="mt-4">
@@ -14,43 +16,49 @@
         <div class="d-flex" style="flex-wrap:wrap">
             @foreach (QL_SanPham SANPHAM in Model)
             {
-            <div class=" " style="width:224px">
-                
-                <div class="  list-product" style="margin:10px">
-                    <a class="product-hover" href="/Customer/ModalProduct/?ID_SP=@SANPHAM.ID_SP">
-                        <div class=" list-product-img">
-                            <div class="display: flex; justify-content: center;">
-                                <img class="img-product" style="width:166px" src="@SANPHAM.HINH_SP" />
+                <div class=" " style="width:214px">
+
+                    <div class="  list-product" style="margin:10px">
+                        <a class="product-hover" href="/Customer/ModalProduct/?ID_SP=@SANPHAM.ID_SP">
+                            <div class=" list-product-img">
+                                <div class="display: flex; justify-content: center;">
+                                    <img class="img-product" style="width:166px" src="@SANPHAM.HINH_SP" />
+                                </div>
+                            </div>
+                            <div class="" style="padding:0 0 0 15px">
+                                <span style="font-size:14px; font-weight:500">@SANPHAM.TenSP</span>
+                            </div>
+                        </a>
+                        <div class="row">
+                            <div class="col-8">
+
+                                <span style="font-size:16px; font-weight:700">@SANPHAM.DG_Ban đ</span>
+                            </div>
+                            <div class="col-4">
+                                <a href="/Customer/ChonMua/@SANPHAM.ID_SP" class="btn btn-primary" style="font-size:8px">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </a>
                             </div>
                         </div>
-                        <div class="" style="padding:0 0 0 15px">
-                            <span style="font-size:14px; font-weight:500">@SANPHAM.TenSP</span>
-                        </div>
-                    </a>
-                    <div class="row">
-                        <div class="col-8">
+                        @*<div class="row">
+                            <div class="col" style="justify-content:center">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                            </div>
+                        </div>*@
 
-                            <span style="font-size:16px; font-weight:700">@SANPHAM.DG_Ban đ</span>
-                        </div>
-                        <div class="col-4">
-                            <a href="/Customer/ChonMua/@SANPHAM.ID_SP" class="btn btn-primary" style="font-size:8px">
-                                <i class="fa-solid fa-cart-shopping"></i>
-                            </a>
-                        </div>
                     </div>
-                    @*<div class="row">
-                        <div class="col" style="justify-content:center">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                        </div>
-                    </div>*@
 
-                </div>
-                   
                 </div>}
+        </div>
+        <div>
+            <p Trang>
+                @(Model.PageCount< Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+                @Html.PagedListPager(Model, page => Url.Action("XyLyTimKiem/", "Customer"))
+            </p>
         </div>
     </div>
 </div>

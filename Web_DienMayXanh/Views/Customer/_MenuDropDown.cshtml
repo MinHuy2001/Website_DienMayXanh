@@ -17,7 +17,7 @@
                 <ul class="dropdown-menu" style="border: 1px solid #f3f3f3; border-radius: 10px; opacity: 1; width: 330px;">
                     @foreach (var item in ViewBag.dsDM)
                     {
-                    <li class="dropdown-menu-item"><a href="/Customer/ProductToMenu/?ID_DM=@item.ID_DM_SP">@item.Ten_DanhMuc</a></li>
+                    <li class="dropdown-menu-item"><a href="/Customer/ViewAllProductToMenu/?ID_DM=@item.ID_DM_SP">@item.Ten_DanhMuc</a></li>
                     }
                 </ul>
             </li>

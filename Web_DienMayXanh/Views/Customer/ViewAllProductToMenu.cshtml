@@ -1,0 +1,103 @@
+﻿@model PagedList.IPagedList<Web_DienMayXanh.Models.QL_SanPham>
+
+@{
+    ViewBag.Title = "ViewAllProductToMenu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var iDDM = ViewBag.IDDM;
+    var ID_DM = iDDM;
+}
+@using PagedList.Mvc;
+@using Web_DienMayXanh.Models;
+@*@model List<QL_SanPham>*@
+<div class="container">
+
+    <div class="" style="min-height:695px; margin-bottom:24px">
+        <div class="mt-4 d-flex justify-content-between">
+            @*@using (Html.BeginForm("ViewAllProduct",))*@
+            <div class="">
+                <h4 style="">Tất cả sản phẩm </h4>
+            </div>
+            @*<div class="mb-3">
+                <form action="/Customer/ViewAllProduct" method="post">
+                    <label for="disabledSelect" class="form-label">Sắp xếp theo giá</label>
+                    <select id="disabledSelect" name="txtSelect" class="form-select">
+                        <option value="">Lọc Giá</option>
+                        <option value="thap-cao">Từ thấp --> Cao</option>
+                        <option value="cao-thap">Từ Cao --> Thấp</option>
+                    </select>
+                    <button type="submit">Lọc</button>
+                    <p class="text-danger" style="font-size:14px; font-weight:700">@lbx</p>
+                </form>
+            </div>*@
+        </div>
+        <div class="d-flex justify-content-center" style="flex-wrap:wrap; min-height: 600px">
+            @foreach (QL_SanPham SANPHAM in Model)
+            {
+                <div class=" " style="width: 220px">
+
+                    <div class="  list-product" style="margin: 10px">
+                        <a class="product-hover" href="/Customer/ModalProduct/?ID_SP=@SANPHAM.ID_SP">
+                            <div class=" list-product-img">
+                                <div class="d-flex justify-content-center">
+                                    <img class="img-product" style="width:166px" src="@SANPHAM.HINH_SP" />
+                                </div>
+                            </div>
+                        </a>
+                        <div class="" style="padding:0 0 0 15px">
+                            <span style="font-size:14px; font-weight:500">@SANPHAM.TenSP</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+
+                                <span style="font-size:16px; font-weight:700">@SANPHAM.DG_Ban đ</span>
+                            </div>
+                            <div class="col-4">
+                                <a href="/Customer/ChonMua/@SANPHAM.ID_SP" class="btn btn-primary" style="font-size:8px">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </a>
+                            </div>
+                        </div>
+                        @*<div class="row">
+                        <div class="col" style="justify-content:center">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                        </div>
+                    </div>*@
+
+                    </div>
+
+                </div>
+
+            }
+
+        </div>
+        <div>
+            <p Trang>
+                @(Model.PageCount< Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+                @Html.PagedListPager(Model, page => Url.Action("ViewAllProductToMenu","Customer",
+new {ID_DM = Request.QueryString["ID_DM"],page }))
+            </p>
+        </div>
+    </div>
+    </div>
+<style>
+    .pagination {
+        justify-content: center;
+    }
+    .active {
+        text-align:center;
+        margin-left:20px;
+        margin-right: 20px;
+        border: 1px solid;
+        width: 33px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    li {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+</style>
